@@ -110,6 +110,7 @@ var fight = function(){
     }else {
 
         window.alert("You need to choose a valid option. Try again!");
+        fight();
 
     }
 
