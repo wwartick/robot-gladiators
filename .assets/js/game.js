@@ -16,7 +16,7 @@ var playerMoney = 10;
 //enemy variables
 var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 
-var enemyHealth = 50;
+var enemyHealth = 0;
 
 var enemyAttack = 12;
 
@@ -125,8 +125,7 @@ var fight = function(enemyName){
     } //end of while loop
 } //end of fight function
 
-//function to start a new game
-
+//end game function
 var endGame = function() {
 
     if (playerHealth > 0) {
@@ -157,7 +156,62 @@ var endGame = function() {
   
   }
   
+  var shop = function() {
 
+    var shopOptionPrompt = window.prompt(
+
+        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+
+    );
+
+    switch (shopOptionPrompt) {
+
+        case "REFILL":
+        case "refill":
+            if (playerMoney >= 7) {
+                window.alert("Refilling player's health by 20 for 7 dollars.");
+            
+                // increase health and decrease money
+                playerHealth = playerHealth + 20;
+                playerMoney = playerMoney - 7;
+              }
+              else {
+                window.alert("You don't have enough money!");
+              }
+          break;
+        
+        case "UPGRADE":
+        case "upgrade":
+            case "upgrade":
+                if (playerMoney >= 7) {
+                  window.alert("Upgrading player's attack by 6 for 7 dollars.");
+              
+                 // increase attack and decrease money
+                  playerAttack = playerAttack + 6;
+                  playerMoney = playerMoney - 7;
+                }
+                else {
+                  window.alert("You don't have enough money!");
+                }
+          break;
+
+        case "LEAVE":
+        case "leave":
+          window.alert("Leaving the store."); 
+          // do nothing, so function will end
+          break;
+
+        default:
+          window.alert("You did not pick a valid option. Try again.");
+          // call shop() again to force player to pick a valid option
+          shop();
+          break;
+      }
+
+};
+
+
+//start game function
 var startGame = function() {
 
     //reset player stats
@@ -182,7 +236,7 @@ if (playerHealth>0) {
 
     //reset enemyHealth before starting a new fight
 
-    enemyHealth = 50;
+    enemyHealth = 10;
 
     //use debugger to pause script from running and check what's going on at that moment in the code
 
@@ -191,6 +245,18 @@ if (playerHealth>0) {
     //pass the pickedEnemyName to variable's value into the fight function, where it will assume the value of the enemyName parameter
 
     fight(pickedEnemyName);
+
+    if (playerHealth > 0 && i < enemyNames.length - 1) {
+
+        var storeConfirm= window.confirm("The fight is over, visit the store before the next round?");
+     
+
+        if (storeConfirm) {
+
+        shop();
+
+        }
+    }
 
 }
 
@@ -202,8 +268,6 @@ else {
     break;
 
 }
-
-   
 
     }  //end of start game function
     
